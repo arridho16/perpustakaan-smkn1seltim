@@ -17,7 +17,7 @@ Sistem Informasi Manajemen Perpustakaan berbasis web yang dirancang untuk mendig
 - **Backend**: PHP 8.2 (CodeIgniter 4.x)
 - **Frontend**: Bootstrap 5.3, Vanilla JavaScript
 - **Database**: MySQL / MariaDB
-- **Server**: Apache (XAMPP/Laragon)
+- **Server**: XAMPP 8.2.12 (Apache)
 
 ## 📦 Instalasi
 
