@@ -25,8 +25,8 @@ Ikuti langkah-langkah berikut untuk menjalankan project di lingkungan lokal:
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/username/perpustakaan.git
-   cd perpustakaan
+   git clone https://github.com/arridho16/perpustakaan-smkn1seltim.git
+   cd perpustakaan-smkn1seltim
    ```
 
 2. **Instal Dependensi**
