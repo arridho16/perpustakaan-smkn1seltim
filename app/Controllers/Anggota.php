@@ -37,11 +37,23 @@ class Anggota extends BaseController
     public function simpan()
     {
         if (!$this->validate([
-            'kode_anggota'  => 'required|is_unique[anggota.kode_anggota]',
-            'nama'          => 'required',
-            'jenis_anggota' => 'required',
+            'kode_anggota'  => [
+                'rules'  => 'required|is_unique[anggota.kode_anggota]',
+                'errors' => [
+                    'required'  => 'Kode anggota (NISN/NIP) harus diisi.',
+                    'is_unique' => 'NISN/NIP ini sudah terdaftar sebagai anggota lain.'
+                ]
+            ],
+            'nama'          => [
+                'rules'  => 'required',
+                'errors' => ['required' => 'Nama lengkap harus diisi.']
+            ],
+            'jenis_anggota' => [
+                'rules'  => 'required',
+                'errors' => ['required' => 'Silakan pilih jenis anggota.']
+            ],
         ])) {
-            return redirect()->back()->withInput()->with('error', 'Cek kembali inputan Anda.');
+            return redirect()->back()->withInput();
         }
 
         $this->anggotaModel->save([
@@ -69,11 +81,19 @@ class Anggota extends BaseController
     public function update($id)
     {
         if (!$this->validate([
-            'kode_anggota'  => "required|is_unique[anggota.kode_anggota,id,{$id}]",
-            'nama'          => 'required',
-            'jenis_anggota' => 'required',
+            'kode_anggota'  => [
+                'rules'  => "required|is_unique[anggota.kode_anggota,id,{$id}]",
+                'errors' => [
+                    'required'  => 'Kode anggota harus diisi.',
+                    'is_unique' => 'NISN/NIP ini sudah digunakan oleh anggota lain.'
+                ]
+            ],
+            'nama'          => [
+                'rules'  => 'required',
+                'errors' => ['required' => 'Nama harus diisi.']
+            ],
         ])) {
-            return redirect()->back()->withInput()->with('error', 'Cek kembali inputan Anda.');
+            return redirect()->back()->withInput();
         }
 
         $this->anggotaModel->update($id, [

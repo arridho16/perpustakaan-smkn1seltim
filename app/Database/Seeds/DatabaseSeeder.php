@@ -8,8 +8,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // Nonaktifkan foreign key check sementara untuk truncate
-        $this->db->query('SET FOREIGN_KEY_CHECKS=0;');
+        // Nonaktifkan foreign key check sementara
+        if ($this->db->DBDriver === 'SQLite3') {
+            $this->db->query('PRAGMA foreign_keys = OFF;');
+        } else {
+            $this->db->query('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         // Truncate semua tabel
         $this->db->table('peminjaman')->truncate();
@@ -18,7 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->db->table('users')->truncate();
 
         // Aktifkan kembali foreign key check
-        $this->db->query('SET FOREIGN_KEY_CHECKS=1;');
+        if ($this->db->DBDriver === 'SQLite3') {
+            $this->db->query('PRAGMA foreign_keys = ON;');
+        } else {
+            $this->db->query('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         // Jalankan Seeder
         $this->call('AdminSeeder');

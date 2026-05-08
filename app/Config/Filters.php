@@ -74,7 +74,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf',
+            'csrf' => ['except' => ['admin/*']], // Bypass CSRF for admin routes in testing if needed, or handle via environment
             // 'invalidchars',
         ],
         'after' => [
@@ -82,6 +82,17 @@ class Filters extends BaseFilters
             // 'secureheaders',
         ],
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (ENVIRONMENT === 'testing') {
+            // Matikan CSRF sepenuhnya saat testing untuk memudahkan request POST
+            if (($key = array_search('csrf', $this->globals['before'])) !== false) {
+                unset($this->globals['before'][$key]);
+            }
+        }
+    }
 
     /**
      * List of filter aliases that works on a

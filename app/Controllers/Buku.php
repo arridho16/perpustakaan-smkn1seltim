@@ -35,20 +35,44 @@ class Buku extends BaseController
     public function simpan()
     {
         if (!$this->validate([
-            'kode_buku' => 'required|is_unique[buku.kode_buku]',
-            'judul'     => 'required',
-            'stok'      => 'required|numeric',
-            'cover'     => 'permit_empty|max_size[cover,2048]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]',
+            'kode_buku' => [
+                'rules'  => 'required|is_unique[buku.kode_buku]',
+                'errors' => [
+                    'required'  => 'Kode buku harus diisi.',
+                    'is_unique' => 'Kode buku sudah ada di database, silakan gunakan kode lain.'
+                ]
+            ],
+            'judul'     => [
+                'rules'  => 'required',
+                'errors' => ['required' => 'Judul buku harus diisi.']
+            ],
+            'stok'      => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'Stok harus diisi.',
+                    'numeric'  => 'Stok harus berupa angka.'
+                ]
+            ],
+            'cover'     => [
+                'rules'  => 'permit_empty|max_size[cover,2048]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar (maks 2MB).',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in'  => 'Format gambar harus jpg, jpeg, atau png.'
+                ]
+            ],
         ])) {
-            return redirect()->back()->withInput()->with('error', 'Validasi gagal. Cek kembali inputan Anda.');
+            return redirect()->back()->withInput()->with('error', 'Cek kembali inputan Anda.');
         }
 
         $fileCover = $this->request->getFile('cover');
         $namaCover = 'default.jpg';
 
-        if ($fileCover->getError() != 4) {
-            $namaCover = $fileCover->getRandomName();
-            $fileCover->move('uploads/covers', $namaCover);
+        if ($fileCover && $fileCover->isValid() && !$fileCover->hasMoved()) {
+            if ($fileCover->getError() != 4) {
+                $namaCover = $fileCover->getRandomName();
+                $fileCover->move('uploads/covers', $namaCover);
+            }
         }
 
         $stok = $this->request->getPost('stok');
@@ -84,12 +108,26 @@ class Buku extends BaseController
         $bukuLama = $this->bukuModel->find($id);
 
         if (!$this->validate([
-            'kode_buku' => "required|is_unique[buku.kode_buku,id,{$id}]",
-            'judul'     => 'required',
-            'stok'      => 'required|numeric',
-            'cover'     => 'permit_empty|max_size[cover,2048]|is_image[cover]|mime_in[cover,image/jpg,image/jpeg,image/png]',
+            'kode_buku' => [
+                'rules'  => "required|is_unique[buku.kode_buku,id,{$id}]",
+                'errors' => [
+                    'required'  => 'Kode buku harus diisi.',
+                    'is_unique' => 'Kode buku sudah digunakan oleh buku lain.'
+                ]
+            ],
+            'judul'     => [
+                'rules'  => 'required',
+                'errors' => ['required' => 'Judul buku harus diisi.']
+            ],
+            'stok'      => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'Stok harus diisi.',
+                    'numeric'  => 'Stok harus berupa angka.'
+                ]
+            ],
         ])) {
-            return redirect()->back()->withInput()->with('error', 'Validasi gagal.');
+            return redirect()->back()->withInput();
         }
 
         $fileCover = $this->request->getFile('cover');

@@ -16,12 +16,14 @@
                 <div class="card-body p-4">
                     <div class="mb-3">
                         <label class="form-label">Judul Buku</label>
-                        <input type="text" name="judul" class="form-control" required value="<?= old('judul', $buku['judul']) ?>">
+                        <input type="text" name="judul" class="form-control <?= validation_show_error('judul') ? 'is-invalid' : '' ?>" value="<?= old('judul', $buku['judul']) ?>">
+                        <div class="invalid-feedback"><?= validation_show_error('judul') ?></div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label class="form-label">Kode Buku / ISBN</label>
-                            <input type="text" name="kode_buku" class="form-control" value="<?= old('kode_buku', $buku['kode_buku']) ?>" required>
+                            <input type="text" name="kode_buku" class="form-control <?= validation_show_error('kode_buku') ? 'is-invalid' : '' ?>" value="<?= old('kode_buku', $buku['kode_buku']) ?>">
+                            <div class="invalid-feedback"><?= validation_show_error('kode_buku') ?></div>
                         </div>
                     </div>
                     <div class="row mb-3">

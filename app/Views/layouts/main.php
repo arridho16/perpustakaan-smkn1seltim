@@ -198,7 +198,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <i class="bi bi-book-half fs-2 mb-2 d-block"></i>
+            <img src="/assets/img/logo-smkn1seltim.png" alt="Logo" class="mb-2 shadow-sm rounded-circle bg-white p-1" style="width: 50px; height: 50px; object-fit: contain;">
             <h3>SIP PERPUS</h3>
             <small class="opacity-75">SMKN 1 Selakau Timur</small>
         </div>
