@@ -88,10 +88,10 @@ class InitDatabase extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('peminjaman');
-        $this->forge->dropTable('buku');
-        $this->forge->dropTable('kategori');
-        $this->forge->dropTable('anggota');
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('peminjaman', true);
+        $this->forge->dropTable('buku', true);
+        $this->forge->dropTable('kategori', true);
+        $this->forge->dropTable('anggota', true);
+        $this->forge->dropTable('users', true);
     }
 }

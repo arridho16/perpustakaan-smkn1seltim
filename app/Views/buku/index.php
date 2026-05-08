@@ -22,50 +22,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($buku)) : ?>
+                    <?php foreach ($buku as $index => $b) : ?>
                         <tr>
-                            <td colspan="5" class="text-center py-4 text-muted">Belum ada koleksi buku.</td>
+                            <td class="d-none d-md-table-cell"><?= $index + 1 ?></td>
+                            <td>
+                                <?php 
+                                $coverPath = 'uploads/covers/' . $b['cover'];
+                                if (!file_exists($coverPath) || empty($b['cover'])) {
+                                    $coverPath = 'uploads/covers/default.jpg';
+                                }
+                                ?>
+                                <img src="/<?= $coverPath ?>" alt="Cover" class="rounded shadow-sm" width="50" height="70" style="object-fit: cover;">
+                            </td>
+                            <td>
+                                <div class="fw-bold text-primary text-truncate mb-0" style="max-width: 150px;" data-bs-toggle="tooltip" data-bs-title="<?= $b['judul'] ?>"><?= $b['judul'] ?></div>
+                                <div class="small text-muted" style="font-size: 0.75rem;">
+                                    <span class="d-block d-md-inline me-md-2 text-dark fw-medium"><?= $b['kode_buku'] ?></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="small fw-bold">Tersedia: <?= $b['stok_tersedia'] ?> / <?= $b['stok'] ?></div>
+                                <div class="progress mt-1" style="height: 5px;">
+                                    <?php $percent = ($b['stok'] > 0) ? ($b['stok_tersedia'] / $b['stok'] * 100) : 0; ?>
+                                    <div class="progress-bar bg-<?= ($percent < 20) ? 'danger' : (($percent < 50) ? 'warning' : 'success') ?>" role="progressbar" style="width: <?= $percent ?>%"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <a href="/admin/buku/edit/<?= $b['id'] ?>" class="btn btn-sm btn-outline-info me-1" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/admin/buku/hapus/<?= $b['id'] ?>" 
+                                   class="btn btn-sm btn-outline-danger" 
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')"
+                                   title="Hapus">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
                         </tr>
-                    <?php else : ?>
-                        <?php foreach ($buku as $index => $b) : ?>
-                            <tr>
-                                <td class="d-none d-md-table-cell"><?= $index + 1 ?></td>
-                                <td>
-                                    <?php 
-                                    $coverPath = 'uploads/covers/' . $b['cover'];
-                                    if (!file_exists($coverPath) || empty($b['cover'])) {
-                                        $coverPath = 'uploads/covers/default.jpg';
-                                    }
-                                    ?>
-                                    <img src="/<?= $coverPath ?>" alt="Cover" class="rounded shadow-sm" width="50" height="70" style="object-fit: cover;">
-                                </td>
-                                <td>
-                                    <div class="fw-bold text-primary text-truncate mb-0" style="max-width: 150px;" data-bs-toggle="tooltip" data-bs-title="<?= $b['judul'] ?>"><?= $b['judul'] ?></div>
-                                    <div class="small text-muted" style="font-size: 0.75rem;">
-                                        <span class="d-block d-md-inline me-md-2 text-dark fw-medium"><?= $b['kode_buku'] ?></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="small fw-bold">Tersedia: <?= $b['stok_tersedia'] ?> / <?= $b['stok'] ?></div>
-                                    <div class="progress mt-1" style="height: 5px;">
-                                        <?php $percent = ($b['stok'] > 0) ? ($b['stok_tersedia'] / $b['stok'] * 100) : 0; ?>
-                                        <div class="progress-bar bg-<?= ($percent < 20) ? 'danger' : (($percent < 50) ? 'warning' : 'success') ?>" role="progressbar" style="width: <?= $percent ?>%"></div>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/admin/buku/edit/<?= $b['id'] ?>" class="btn btn-sm btn-outline-info me-1" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="/admin/buku/hapus/<?= $b['id'] ?>" 
-                                       class="btn btn-sm btn-outline-danger" 
-                                       onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')"
-                                       title="Hapus">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

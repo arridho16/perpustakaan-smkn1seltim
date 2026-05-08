@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call('AdminSeeder');
         $this->call('AnggotaSeeder');
         $this->call('BukuSeeder');
+        $this->call('PeminjamanSeeder');
     }
 }

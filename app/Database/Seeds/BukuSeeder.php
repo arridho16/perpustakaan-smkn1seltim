@@ -10,51 +10,75 @@ class BukuSeeder extends Seeder
     {
         $data = [
             [
-                'kode_buku'    => 'BK-001',
-                'judul'        => 'Matematika Kelas X',
-                'pengarang'    => 'Kemdikbud',
-                'penerbit'     => 'Erlangga',
-                'tahun_terbit' => '2021',
-                'stok'         => 40,
-                'stok_tersedia'=> 40,
-                'cover'        => 'default.jpg',
-                'created_at'   => date('Y-m-d H:i:s'),
+                'judul'         => 'Matematika Kelas XII',
+                'pengarang'     => 'Kemdikbud',
+                'penerbit'      => 'Pusat Perbukuan',
+                'tahun_terbit'  => 2022,
+                'stok'          => 200,
+                'stok_tersedia' => 200,
+                'kode_buku'     => 'MTK-XII-001',
+                'deskripsi'     => 'Buku panduan matematika tingkat akhir sekolah menengah.',
+                'cover'         => 'default.jpg'
             ],
             [
-                'kode_buku'    => 'BK-002',
-                'judul'        => 'Bahasa Indonesia Kelas XI',
-                'pengarang'    => 'Kemdikbud',
-                'penerbit'     => 'Balai Pustaka',
-                'tahun_terbit' => '2022',
-                'stok'         => 35,
-                'stok_tersedia'=> 35,
-                'cover'        => 'default.jpg',
-                'created_at'   => date('Y-m-d H:i:s'),
+                'judul'         => 'Pemrograman Web dengan PHP & CI4',
+                'pengarang'     => 'Budi Raharjo',
+                'penerbit'      => 'Informatika',
+                'tahun_terbit'  => 2023,
+                'stok'          => 100,
+                'stok_tersedia' => 100,
+                'kode_buku'     => 'PROG-001',
+                'deskripsi'     => 'Panduan lengkap membangun aplikasi web modern.',
+                'cover'         => 'default.jpg'
             ],
             [
-                'kode_buku'    => 'BK-003',
-                'judul'        => 'Pemrograman Dasar SMK',
-                'pengarang'    => 'Andi Publisher',
-                'penerbit'     => 'Informatika',
-                'tahun_terbit' => '2023',
-                'stok'         => 25,
-                'stok_tersedia'=> 25,
-                'cover'        => 'default.jpg',
-                'created_at'   => date('Y-m-d H:i:s'),
+                'judul'         => 'Laskar Pelangi',
+                'pengarang'     => 'Andrea Hirata',
+                'penerbit'      => 'Bentang Pustaka',
+                'tahun_terbit'  => 2005,
+                'stok'          => 50,
+                'stok_tersedia' => 50,
+                'kode_buku'     => 'FIK-001',
+                'deskripsi'     => 'Novel inspiratif tentang perjuangan anak sekolah di Belitung.',
+                'cover'         => 'default.jpg'
             ],
             [
-                'kode_buku'    => 'BK-004',
-                'judul'        => 'Sejarah Indonesia',
-                'pengarang'    => 'Yudhistira',
-                'penerbit'     => 'Yudhistira',
-                'tahun_terbit' => '2020',
-                'stok'         => 30,
-                'stok_tersedia'=> 30,
-                'cover'        => 'default.jpg',
-                'created_at'   => date('Y-m-d H:i:s'),
+                'judul'         => 'Bahasa Inggris: English for SMK',
+                'pengarang'     => 'Siti Nurhayati',
+                'penerbit'      => 'Erlangga',
+                'tahun_terbit'  => 2021,
+                'stok'          => 150,
+                'stok_tersedia' => 150,
+                'kode_buku'     => 'ENG-SMK-001',
+                'deskripsi'     => 'Materi bahasa Inggris khusus untuk siswa kejuruan.',
+                'cover'         => 'default.jpg'
+            ],
+            [
+                'judul'         => 'Dasar-Dasar Teknik Mesin',
+                'pengarang'     => 'Ir. Suharyanto',
+                'penerbit'      => 'Andi Offset',
+                'tahun_terbit'  => 2020,
+                'stok'          => 120,
+                'stok_tersedia' => 120,
+                'kode_buku'     => 'TM-001',
+                'deskripsi'     => 'Konsep dasar permesinan dan otomotif.',
+                'cover'         => 'default.jpg'
+            ],
+            [
+                'judul'         => 'Bumi',
+                'pengarang'     => 'Tere Liye',
+                'penerbit'      => 'Gramedia',
+                'tahun_terbit'  => 2014,
+                'stok'          => 80,
+                'stok_tersedia' => 80,
+                'kode_buku'     => 'FIK-002',
+                'deskripsi'     => 'Novel petualangan dunia paralel yang sangat populer.',
+                'cover'         => 'default.jpg'
             ],
         ];
 
-        $this->db->table('buku')->insertBatch($data);
+        foreach ($data as $b) {
+            $this->db->table('buku')->insert($b);
+        }
     }
 }

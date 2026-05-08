@@ -26,11 +26,6 @@
                         </tr>
                     </thead>
                          <tbody>
-                             <?php if (empty($peminjaman)) : ?>
-                                 <tr>
-                                     <td colspan="7" class="text-center py-4 text-muted">Semua buku telah dikembalikan.</td>
-                                 </tr>
-                             <?php else : ?>
                                  <?php foreach ($peminjaman as $p) : ?>
                                      <tr>
                                          <td class="fw-bold d-none d-md-table-cell small"><?= $p['kode_pinjam'] ?></td>
@@ -67,7 +62,6 @@
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

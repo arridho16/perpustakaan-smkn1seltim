@@ -24,44 +24,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($anggota)) : ?>
+                    <?php foreach ($anggota as $index => $a) : ?>
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">Belum ada data anggota.</td>
+                            <td class="d-none d-md-table-cell"><?= $index + 1 ?></td>
+                            <td class="fw-bold text-primary d-none d-md-table-cell"><?= $a['kode_anggota'] ?></td>
+                            <td>
+                                <div class="fw-bold mb-0"><?= $a['nama'] ?></div>
+                                <div class="small d-md-none text-muted"><?= $a['kode_anggota'] ?></div>
+                            </td>
+                            <td>
+                                <span class="badge <?= $a['jenis_anggota'] == 'guru' ? 'bg-info' : 'bg-secondary' ?> text-capitalize">
+                                    <?= $a['jenis_anggota'] ?>
+                                </span>
+                            </td>
+                            <td class="d-none d-md-table-cell"><?= $a['no_hp'] ?? '-' ?></td>
+                            <td>
+                                <span class="badge <?= $a['status'] == 'aktif' ? 'bg-success' : 'bg-danger' ?>">
+                                    <?= $a['status'] ?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a href="/admin/anggota/edit/<?= $a['id'] ?>" class="btn btn-sm btn-outline-info me-1" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/admin/anggota/hapus/<?= $a['id'] ?>" 
+                                   class="btn btn-sm btn-outline-danger" 
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus anggota ini?')"
+                                   title="Hapus">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
                         </tr>
-                    <?php else : ?>
-                        <?php foreach ($anggota as $index => $a) : ?>
-                            <tr>
-                                <td class="d-none d-md-table-cell"><?= $index + 1 ?></td>
-                                <td class="fw-bold text-primary d-none d-md-table-cell"><?= $a['kode_anggota'] ?></td>
-                                <td>
-                                    <div class="fw-bold mb-0"><?= $a['nama'] ?></div>
-                                    <div class="small d-md-none text-muted"><?= $a['kode_anggota'] ?></div>
-                                </td>
-                                <td>
-                                    <span class="badge <?= $a['jenis_anggota'] == 'guru' ? 'bg-info' : 'bg-secondary' ?> text-capitalize">
-                                        <?= $a['jenis_anggota'] ?>
-                                    </span>
-                                </td>
-                                <td class="d-none d-md-table-cell"><?= $a['no_hp'] ?? '-' ?></td>
-                                <td>
-                                    <span class="badge <?= $a['status'] == 'aktif' ? 'bg-success' : 'bg-danger' ?>">
-                                        <?= $a['status'] ?>
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/admin/anggota/edit/<?= $a['id'] ?>" class="btn btn-sm btn-outline-info me-1" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="/admin/anggota/hapus/<?= $a['id'] ?>" 
-                                       class="btn btn-sm btn-outline-danger" 
-                                       onclick="return confirm('Apakah Anda yakin ingin menghapus anggota ini?')"
-                                       title="Hapus">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

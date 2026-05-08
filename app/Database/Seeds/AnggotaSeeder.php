@@ -9,48 +9,47 @@ class AnggotaSeeder extends Seeder
     public function run()
     {
         $data = [
+            // Data Kelas (Siswa kolektif)
             [
-                'kode_anggota'  => 'SIS-001',
-                'nama'          => 'Andi Pratama',
+                'kode_anggota'  => 'KLS-XII-TKJA',
+                'nama'          => 'Kelas XII TKJ A',
                 'jenis_anggota' => 'siswa',
-                'no_hp'         => '081234567890',
-                'status'        => 'aktif',
-                'created_at'    => date('Y-m-d H:i:s'),
+                'no_hp'         => '081234567800',
+                'status'        => 'aktif'
             ],
             [
-                'kode_anggota'  => 'SIS-002',
-                'nama'          => 'Budi Santoso',
+                'kode_anggota'  => 'KLS-XI-APAT',
+                'nama'          => 'Kelas XI APAT',
                 'jenis_anggota' => 'siswa',
-                'no_hp'         => '081234567891',
-                'status'        => 'aktif',
-                'created_at'    => date('Y-m-d H:i:s'),
+                'no_hp'         => '081234567801',
+                'status'        => 'aktif'
             ],
             [
-                'kode_anggota'  => 'SIS-003',
-                'nama'          => 'Citra Lestari',
+                'kode_anggota'  => 'KLS-X-TBSM',
+                'nama'          => 'Kelas X TBSM',
                 'jenis_anggota' => 'siswa',
-                'no_hp'         => '081234567892',
-                'status'        => 'aktif',
-                'created_at'    => date('Y-m-d H:i:s'),
+                'no_hp'         => '081234567802',
+                'status'        => 'aktif'
             ],
+            // Data Guru (Individu)
             [
-                'kode_anggota'  => 'GRU-001',
-                'nama'          => 'Bp. Hendra Wijaya',
+                'kode_anggota'  => '197501012005011001',
+                'nama'          => 'Budi Santoso, S.Pd',
                 'jenis_anggota' => 'guru',
-                'no_hp'         => '085234567801',
-                'status'        => 'aktif',
-                'created_at'    => date('Y-m-d H:i:s'),
+                'no_hp'         => '085245678912',
+                'status'        => 'aktif'
             ],
             [
-                'kode_anggota'  => 'GRU-002',
-                'nama'          => 'Ibu Maya Sari',
+                'kode_anggota'  => '198805122015022003',
+                'nama'          => 'Siti Aminah, S.Pd',
                 'jenis_anggota' => 'guru',
-                'no_hp'         => '085234567802',
-                'status'        => 'aktif',
-                'created_at'    => date('Y-m-d H:i:s'),
+                'no_hp'         => '082156789034',
+                'status'        => 'aktif'
             ],
         ];
 
-        $this->db->table('anggota')->insertBatch($data);
+        foreach ($data as $a) {
+            $this->db->table('anggota')->insert($a);
+        }
     }
 }
